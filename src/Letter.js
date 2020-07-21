@@ -1,12 +1,8 @@
-import React, { Component, PropTypes } from 'react';
-
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 class Letter extends Component {
   render() {
-    return (
-      <span className="Letter">
-        {this.props.value}
-      </span>
-    );
+    return <span className='Letter'>{this.props.value}</span>;
   }
 }
 

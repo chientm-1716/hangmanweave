@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import AttemptsLeft from './AttemptsLeft';
 import Letter from './Letter';
 import Word from './Word';
@@ -13,12 +13,10 @@ import './Game.css';
 class Game extends Component {
   render() {
     return (
-      <div className="Game-content">
-        <div className="Game-SideBySide">
+      <div className='Game-content'>
+        <div className='Game-SideBySide'>
           {this._renderInputPanel()}
-          <div className="Game-Hangman">
-            {hangmanAttempts(this.props.guesses)}
-          </div>
+          <div className='Game-Hangman'>{hangmanAttempts(this.props.guesses)}</div>
         </div>
       </div>
     );
@@ -27,23 +25,22 @@ class Game extends Component {
   _renderInputPanel() {
     const hasAttemptsLeft = this.props.guesses > 0;
     const gameWon = this.props.gameState === GAME_WON;
-    const content = hasAttemptsLeft
-        ? gameWon
-          ? this._renderGameFinished('Congrats! 🤗 🏆 🤗', 'Game-GameWin')
-          : (
-            <div className="Game-VirtualKeyboard">
-              <VirtualKeyboard
-                excluded={this.props.pastGuesses}
-                onClick={this.props.onLetterClick}
-              />
-            </div>
-          )
-        : this._renderGameFinished('GAME OVER ☠️', 'Game-GameOver');
+    const content = hasAttemptsLeft ? (
+      gameWon ? (
+        this._renderGameFinished('Congrats! 🤗 🏆 🤗', 'Game-GameWin')
+      ) : (
+        <div className='Game-VirtualKeyboard'>
+          <VirtualKeyboard excluded={this.props.pastGuesses} onClick={this.props.onLetterClick} />
+        </div>
+      )
+    ) : (
+      this._renderGameFinished('GAME OVER ☠️', 'Game-GameOver')
+    );
 
     return (
-      <div className="Game-InputPanel">
+      <div className='Game-InputPanel'>
         {this._renderWord()}
-        <div className="Game-AttemptsLeft">
+        <div className='Game-AttemptsLeft'>
           <AttemptsLeft attempts={this.props.guesses} />
         </div>
         {content}
@@ -58,26 +55,21 @@ class Game extends Component {
         <RestartButton
           onClick={this.props.onRestartClick}
           gameState={this.props.gameState}
+          timeScore={this.props.timeScore}
         />
       </div>
-    )
+    );
   }
 
   _renderWord() {
     return (
-      <div className="Game-Word">
+      <div className='Game-Word'>
         <Word>
           {this.props.letters.map((letter, i) => {
-            const letterValue = (
-              this.props.gameState === GAME_OVER || letter.guessed
-            ) ? letter.value : '_';
+            const letterValue =
+              this.props.gameState === GAME_OVER || letter.guessed ? letter.value : '_';
 
-            return (
-              <Letter
-                key={`word-letter-${i}`}
-                value={letterValue}
-              />
-            );
+            return <Letter key={`word-letter-${i}`} value={letterValue} />;
           })}
         </Word>
       </div>
@@ -88,14 +80,16 @@ class Game extends Component {
 Game.propTypes = {
   guesses: PropTypes.number.isRequired,
   word: PropTypes.string.isRequired,
-  letters: PropTypes.arrayOf(PropTypes.shape({
-    value: PropTypes.string.isRequired,
-    guessed: PropTypes.bool.isRequired,
-  })).isRequired,
+  letters: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      guessed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
   gameState: PropTypes.symbol.isRequired,
   pastGuesses: PropTypes.arrayOf(PropTypes.string).isRequired,
   onLetterClick: PropTypes.func.isRequired,
   onRestartClick: PropTypes.func.isRequired,
-}
+};
 
 export default Game;

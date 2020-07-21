@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './LetterBlock.css';
 
 class LetterBlock extends Component {
   render() {
     return (
-      <div onClick={this.props.onClick} className="LetterBlock">
-        <span>
-          {this.props.value}
-        </span>
+      <div onClick={this.props.onClick} className='LetterBlock'>
+        <span>{this.props.value}</span>
       </div>
     );
   }

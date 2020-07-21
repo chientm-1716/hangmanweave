@@ -11,3 +11,8 @@
 .App a:hover {
   text-decoration: none;
 }
+
+.btnStart {
+  flex: 0.7;
+  padding-left: 8px;
+}

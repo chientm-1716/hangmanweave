@@ -4,14 +4,45 @@
 }
 
 .App-header {
-  flex: .2;
+  flex: 0.2;
   text-align: center;
   background-color: #222;
   padding: 8px;
   color: #fff;
+  text-align: justify;
+}
+
+.address {
+  color: green;
+}
+
+.login:hover {
+  cursor: pointer;
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.col {
+  display: inline;
+}
+
+.col-item {
+  display: inline !important;
+  padding-left: 150px;
+}
+
+.col-rank {
+  display: inline !important;
+  padding-left: 10px;
+}
+
+.time {
+  padding-left: 350px;
 }
